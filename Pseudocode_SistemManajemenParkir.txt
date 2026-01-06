@@ -1,0 +1,69 @@
+BEGIN
+    CONST MAX = 100
+    DECLARE plat[MAX], jenis[MAX] AS STRING
+    DECLARE jumlah, pilihan AS INTEGER
+    jumlah ← 0
+
+    DO
+        DISPLAY menu
+        INPUT pilihan
+
+        SWITCH pilihan
+            CASE 1:
+                IF jumlah < MAX THEN
+                    INPUT plat[jumlah]
+                    INPUT jenis[jumlah]
+                    jumlah ← jumlah + 1
+                    DISPLAY "Kendaraan berhasil ditambahkan"
+                ELSE
+                    DISPLAY "Parkiran penuh"
+                ENDIF
+
+            CASE 2:
+                IF jumlah = 0 THEN
+                    DISPLAY "Belum ada kendaraan"
+                ELSE
+                    FOR i ← 0 TO jumlah - 1
+                        DISPLAY plat[i], jenis[i]
+                    ENDFOR
+                ENDIF
+
+            CASE 3:
+                INPUT platCari
+                ditemukan ← false
+
+                FOR i ← 0 TO jumlah - 1
+                    IF plat[i] = platCari THEN
+                        DISPLAY plat[i], jenis[i]
+                        ditemukan ← true
+                        BREAK
+                    ENDIF
+                ENDFOR
+
+                IF ditemukan = false THEN
+                    DISPLAY "Kendaraan tidak ditemukan"
+                ENDIF
+
+            CASE 4:
+                DISPLAY jumlah
+
+            CASE 5:
+                total ← 0
+                FOR i ← 0 TO jumlah - 1
+                    IF jenis[i] = "Motor" THEN
+                        total ← total + 2000
+                    ELSE IF jenis[i] = "Mobil" THEN
+                        total ← total + 5000
+                    ENDIF
+                ENDFOR
+                DISPLAY total
+
+            CASE 6:
+                DISPLAY "Program selesai"
+
+            DEFAULT:
+                DISPLAY "Pilihan tidak valid"
+        ENDSWITCH
+
+    WHILE pilihan ≠ 6
+END
